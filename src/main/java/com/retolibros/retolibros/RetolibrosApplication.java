@@ -40,7 +40,6 @@ public class RetolibrosApplication implements CommandLineRunner{
 			 int opcion = scanner.nextInt();
 			 scanner.nextLine();
 
-
 			 switch (opcion){
 				 case 1:
 					 System.out.println("Ingrese el nombre del libro que desea buscar");
