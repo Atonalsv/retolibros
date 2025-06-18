@@ -1,5 +1,6 @@
-package Recursos;
+package com.retolibros.retolibros.Recursos;
 
+import com.retolibros.retolibros.modelos.DatosAutor;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -11,25 +12,27 @@ public class Autor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @Column(unique = true)
     private String autor;
 
     private int fechaDeNacimiento;
 
     private int fechaDeFallecimiento;
 
-    private String libros;
+    public Autor(){}
 
-    @Transient
-    private List<Libro> listalibros;
 
-    public String getLibros() {
-        return libros;
+    public Autor(DatosAutor datosAutor) {
+        this.autor = datosAutor.nombreAutor();
+        this.fechaDeNacimiento = datosAutor.fechaDeNacimiento();
+        this.fechaDeFallecimiento = datosAutor.fechaDeFallecimiento();
     }
 
-    public void setLibros(String libros) {
-        this.libros = libros;
-    }
+
+
+
+
+
+
 
     public int getFechaDeFallecimiento() {
         return fechaDeFallecimiento;
@@ -60,6 +63,6 @@ public class Autor {
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.Id = id;
     }
 }

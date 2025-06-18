@@ -1,4 +1,4 @@
-package Servicios;
+package com.retolibros.retolibros.Servicios;
 
 public interface IConvierteDatos {
     <T> T obtenerDatos(String json, Class<T> clase);

@@ -1,6 +1,8 @@
-package Recursos;
+package com.retolibros.retolibros.Recursos;
 
 import jakarta.persistence.*;
+import com.retolibros.retolibros.modelos.Datoslibro;
+
 
 @Entity
 @Table(name = "libros")
@@ -10,13 +12,37 @@ public class Libro {
     private Long Id;
 
     @Column(unique = true)
-    private String titulo;
-
     private String autor;
-
+    private String titulo;
     private String idioma;
+    private Integer numeroDeDescargas;
 
-    private int numeroDeDescargas;
+    public Libro (){}
+
+
+    public Libro (Datoslibro datosLibro) {
+        this.titulo = datosLibro.titulo();
+        this.autor = datosLibro.listaAutor().get(0).nombreAutor();
+        this.idioma = datosLibro.idioma();
+        this.numeroDeDescargas = datosLibro.numeroDeDescargas();
+    }
+
+
+
+
+
+    @Override
+    public String toString() {
+        return "----- Libro -----" +
+                "\n Titulo: " + titulo +
+                "\n Autor: " + autor +
+                "\n Idioma: " + idioma +
+                "\n Número de descargas: " + numeroDeDescargas +
+                "\n-----------------\n";
+    }
+
+
+
 
 
 
@@ -26,7 +52,7 @@ public class Libro {
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.Id = id;
     }
 
     public int getNumeroDeDescargas() {
