@@ -24,6 +24,7 @@ public class RetolibrosApplication implements CommandLineRunner{
 
 	public void run(String[] args) {
 		Main principal = new Main(libroRepository,autorRepository);
+		principal.principal();
 
 	}
 }

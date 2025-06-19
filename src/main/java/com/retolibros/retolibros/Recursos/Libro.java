@@ -1,5 +1,6 @@
 package com.retolibros.retolibros.Recursos;
 
+import com.retolibros.retolibros.modelos.DatosResultado;
 import jakarta.persistence.*;
 import com.retolibros.retolibros.modelos.Datoslibro;
 
@@ -20,10 +21,10 @@ public class Libro {
     public Libro (){}
 
 
-    public Libro (Datoslibro datosLibro) {
+    public Libro (DatosResultado datosLibro) {
         this.titulo = datosLibro.titulo();
-        this.autor = datosLibro.listaAutor().get(0).nombreAutor();
-        this.idioma = datosLibro.idioma();
+        this.autor = datosLibro.autorList().get(0).nombreAutor();
+        this.idioma = datosLibro.idioma().get(0);
         this.numeroDeDescargas = datosLibro.numeroDeDescargas();
     }
 
@@ -31,15 +32,15 @@ public class Libro {
 
 
 
-    @Override
-    public String toString() {
-        return "----- Libro -----" +
-                "\n Titulo: " + titulo +
-                "\n Autor: " + autor +
-                "\n Idioma: " + idioma +
-                "\n Número de descargas: " + numeroDeDescargas +
-                "\n-----------------\n";
-    }
+//    @Override
+//    public String toString() {
+//        return "----- Libro -----" +
+//                "\n Titulo: " + titulo +
+//                "\n Autor: " + autor +
+//                "\n Idioma: " + idioma +
+//                "\n Número de descargas: " + numeroDeDescargas +
+//                "\n-----------------\n";
+//    }
 
 
 
@@ -55,7 +56,7 @@ public class Libro {
         this.Id = id;
     }
 
-    public int getNumeroDeDescargas() {
+    public Integer getNumeroDeDescargas() {
         return numeroDeDescargas;
     }
 
