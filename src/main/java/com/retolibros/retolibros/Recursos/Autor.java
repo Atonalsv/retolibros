@@ -14,9 +14,9 @@ public class Autor {
 
     private String autor;
 
-    private int fechaDeNacimiento;
+    private Integer fechaDeNacimiento;
 
-    private int fechaDeFallecimiento;
+    private Integer fechaDeFallecimiento;
 
     public Autor(){}
 
@@ -34,7 +34,7 @@ public class Autor {
 
 
 
-    public int getFechaDeFallecimiento() {
+    public Integer getFechaDeFallecimiento() {
         return fechaDeFallecimiento;
     }
 
@@ -42,7 +42,7 @@ public class Autor {
         this.fechaDeFallecimiento = fechaDeFallecimiento;
     }
 
-    public int getFechaDeNacimiento() {
+    public Integer getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface AutorRepository extends JpaRepository<Autor,Long> {
 
-    @Query(value = "SELECT * FROM authors WHERE :year >= birth_year AND :year <= death_year", nativeQuery = true)
+    @Query(value = "SELECT * FROM Autores WHERE :anoBusqueda >= fecha_de_nacimiento AND :anoBusqueda <= fecha_de_fallecimiento", nativeQuery = true)
     List<Autor> autorPorFecha(int anoBusqueda);
 
 

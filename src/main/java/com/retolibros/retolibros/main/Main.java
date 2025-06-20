@@ -53,16 +53,16 @@ public class Main {
                     buscarLibro();
                     break;
                 case 2:
-                    //consultarLibros();
+                    consultarLibros();
                     break;
                 case 3:
-                    //consultarAutores();
+                    consultarAutores();
                     break;
                 case 4:
-                    //consultarAutoresPorAno();
+                    consultarAutoresPorAno();
                     break;
                 case 5:
-                    //consultarLibrosLenguaje();
+                    consultarLibrosLenguaje();
                     break;
                 case 0:
                     System.out.println("Hasta luego");
@@ -103,11 +103,106 @@ public class Main {
                     libro.getIdioma(),
                     libro.getNumeroDeDescargas().toString()));
 
+            libroRepository.save(libro);
+            autorRepository.save(autor);
+
         } catch (Exception e) {
             System.out.println("no se encontro ese libro");
         }
 
 
+    }
+    // Trae los libros guardados en la BD
+    private void consultarLibros() {
+        libros = libroRepository.findAll();
+        libros.stream().forEach(l -> {
+            System.out.println("""    
+                        Titulo: %s
+                        Author: %s
+                        Lenguaje: %s
+                        Descargas: %s
+                    """.formatted(l.getTitulo(),
+                    l.getAutor(),
+                    l.getIdioma(),
+                    l.getNumeroDeDescargas().toString()));
+        });
+    }
+
+    // Trae todos los autores de los libros consultados en la BD
+    private void consultarAutores() {
+        autores = autorRepository.findAll();
+        autores.stream().forEach(a -> {
+            System.out.println("""
+                        Autor: %s
+                        Año de nacimiento: %s
+                        Año de defuncion: %s
+                    """.formatted(a.getAutor(),
+                    a.getFechaDeNacimiento().toString(),
+                    a.getFechaDeFallecimiento().toString()));
+        });
+    }
+
+    // Trae a los autores apartir de cierto año
+    public void consultarAutoresPorAno() {
+        System.out.println("Ingresa el año a partir del cual buscar:");
+        int anoBusqueda = scanner.nextInt();
+        scanner.nextLine();
+
+        List<Autor> autores = autorRepository.autorPorFecha(anoBusqueda);
+        if (autores.isEmpty()) {
+            System.out.println("No hay autores disponibles en la fecha seleccionada");
+        } else {
+            autores.forEach(a -> {
+                System.out.println("""
+                        Nombre: %s
+                        Fecha de nacimiento: %s
+                        Fecha de defuncion: %s
+                        """.formatted(a.getAutor(), a.getFechaDeNacimiento().toString(), a.getFechaDeFallecimiento().toString()));
+            });
+        }
+    }
+    private void consultarLibrosLenguaje(){
+        System.out.println("""
+                ****************************************************************    
+                    Selcciona el lenguaje de los libros que deseas consultar
+                ****************************************************************
+                1 - En (Ingles)
+                2 - Es (Español)
+                """);
+
+        try {
+
+            int opcion2 = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcion2) {
+                case 1:
+                    libros = libroRepository.findByLenguaje("en");
+                    break;
+                case 2:
+                    libros = libroRepository.findByLenguaje("es");
+                    break;
+
+                default:
+                    System.out.println("Ingresa una opcion valida");
+                    break;
+            }
+
+            libros.stream().forEach(l -> {
+                System.out.println("""    
+                        Titulo: %s
+                        Author: %s
+                        Lenguaje: %s
+                        Descargas: %s
+                    """.formatted(l.getTitulo(),
+                        l.getAutor(),
+                        l.getIdioma(),
+                        l.getNumeroDeDescargas().toString()));
+            });
+
+        } catch (Exception e){
+            System.out.println("Ingresa un valor valido");
+        }
     }
 
 
